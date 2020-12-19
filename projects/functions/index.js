@@ -34,8 +34,6 @@ function sumWithDefaults(a, b = 100) {
   return a + b;
 }
 
-
-
 /*
  Задание 3:
 
@@ -94,14 +92,14 @@ function returnArgumentsArray(...args) {
    console.log(newSum()) выведет 6
  */
 function bindFunction(fn, ...args) {
-  return () => fn(...args);
+  return () => fn.call(this, ...args);
 }
 
 export {
-    returnFirstArgument,
-    sumWithDefaults,
-    returnArgumentsArray,
-    returnFnResult,
-    returnCounter,
-    bindFunction
-}
+  returnFirstArgument,
+  sumWithDefaults,
+  returnArgumentsArray,
+  returnFnResult,
+  returnCounter,
+  bindFunction,
+};
