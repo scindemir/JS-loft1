@@ -30,6 +30,8 @@ function map(array, fn) {
   for (let i = 0; i < array.length; i++) {
     modified[i] = fn(array[i], i, array);
   }
+
+  return modified;
 }
 
 /*
