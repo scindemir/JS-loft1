@@ -50,7 +50,7 @@ function prepend(what, where) {
 function findAllPSiblings(where) {
   const array = [];
   for (const elem of where.children) {
-    if (elem.nextElementSibling && elem.nextElementSibling === 'p') {
+    if (elem.nextElementSibling && elem.nextElementSibling.tagName === 'P') {
       array.push(elem);
     }
   }
@@ -116,7 +116,8 @@ function deleteTextNodes(where) {
    должно быть преобразовано в <span><div><b></b></div><p></p></span>
  */
 function deleteTextNodesRecursive(where) {
-  for (const node of where.childNodes) {
+  const array = [...where.childNodes];
+  for (const node of array) {
     if (node.nodeType === 3) {
       node.remove();
     } else if (node.nodeType === 1) {
@@ -162,11 +163,13 @@ function collectDOMStat(root) {
           obj.tags[child.tagName] = 1;
         }
       }
-      for (const className of child.classList) {
-        if (className in obj.classes) {
-          obj.classes[className]++;
-        } else {
-          obj.classes[className] = 1;
+      if (child.classList) {
+        for (const className of child.classList) {
+          if (className in obj.classes) {
+            obj.classes[className]++;
+          } else {
+            obj.classes[className] = 1;
+          }
         }
       }
       scan(child);
