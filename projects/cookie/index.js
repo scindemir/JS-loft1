@@ -54,7 +54,7 @@ function getCookies() {
   return document.cookie
     .split('; ')
     .filter(Boolean)
-    .map((cookie) => cookie.watch(/^([^=]+)=(.+)/))
+    .map((cookie) => cookie.match(/^([^=]+)=(.+)/))
     .reduce((obj, [, name, value]) => {
       obj.set(name, value);
       return obj;
